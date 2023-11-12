@@ -7,9 +7,9 @@ Created on Tue Nov  7 11:45:24 2023
 """
 
 #TP3 IPC
-simbolo_repartida="~"
-lista=[]
+simbolo_excluye="~"  #Cuando la deuda se reparte entre todos, menos los que le siguen al "~"
 
+lista=[]
 
 with open("corto.txt","r") as corto:
     for linea in corto:
@@ -18,15 +18,14 @@ with open("corto.txt","r") as corto:
         
     
                
-my_dic={}
+deuda={}
 for nombre in lista[0].split(" "):
-    my_dic[nombre]=0
+    deuda[nombre]=0
 
 
 #print(my_dic)
 
-for linea in lista:
-    linea=linea.split(" ")
-    if simbolo_repartida in linea:
-        print("god")
-#print(lista[1])
+for i in range(len(lista)):
+    lista[i] = lista[i].split()
+        
+    
