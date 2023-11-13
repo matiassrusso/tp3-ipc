@@ -54,5 +54,7 @@ def main():
     for persona, deuda in deudas.items():
         print(f"{persona}: ${deuda:.2f}")
 
+
+
 if __name__ == "__main__":
     main()
