@@ -47,17 +47,24 @@ for dias in lista2[1:]:
 i=0
 for fecha in fechas:
     print(fecha)
-    num=fecha.pop(i)
-    num1 = int(num)
+    i=0
+    for index in fecha:
+        print(i)
+        x=fecha.pop(i)
+        y=int(x)
+        fecha.append(y)
+        i+=1
     
-    i+=1
+    
+    
+print(fecha)
     #fecha = int(fecha)
     
     #years.append(int(fechas[0]))
     #months.append(int(fechas[1]))
     #day.append(int(fechas[2]))
     
-print(fechas)   
+#print(fechas)   
  
 
 """
@@ -90,7 +97,7 @@ for lineas in lista2[1:]:
         pagan=int(lineas[2])/int(len(lineas[3:]))
         for nombres in lineas[3:]:
             deuda[nombres]+=round (pagan,2)
-print(deuda)
+#print(deuda)
     
 
 
