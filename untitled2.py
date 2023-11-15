@@ -38,6 +38,9 @@ for i in range(len(lista)):
 
 #print(deuda)
 
+for key in deuda:
+    locals()[key] = [[], []]
+
 
 
 fechas_str = []
@@ -63,12 +66,13 @@ print(prueba)
 k=0
 
 for lineas in lista2[1:prueba]: #calcula la deuda hasta el valor de u (cantidad de lineas hasta la fecha)
-    
+
     if simbolo_excluye in lineas:
         deuda[lineas[1]] = round (deuda[lineas[1]]-int(lineas[2]),2) #Se le resta al que pago en el diccionario
         pagan=int(lineas[2])/(len(deuda)-len(lineas[4:])) #Se calcula en cada linea cuanto se debe pagar por persona
         deudores = []
         for nombres in inquilinos:
+            print(inquilinos)
             if nombres not in lineas[4:]:
                 deudores.append(nombres)
         for nombre in deudores:
@@ -87,20 +91,18 @@ for lineas in lista2[1:prueba]: #calcula la deuda hasta el valor de u (cantidad 
     
 #print(deuda)
 
-'''
+"""
 plt.figure()
-    #plt.plot (fechas_int[k][0], deuda['Jennifer'], label = 'Azul')
+plt.plot (fechas_int[k], deuda['Jennifer'], label = 'Azul')
 
-    #plt.plot(fechas_int[k][0], deuda['Jennifer'], 'bo', label='Azul')  # 'bo' means blue color and circle marker
-    k+= 1
+plt.plot(fechas_int[k][0], deuda['Jennifer'], 'bo', label='Azul')  # 'bo' means blue color and circle marker
+k+= 1
 plt.xlim([2022,1,1],[2022,3,1])
 plt.ylim([-300000,200000])
 plt.show()
-'''
+"""
 
 
-
-        
         
        
     
