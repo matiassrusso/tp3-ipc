@@ -10,8 +10,7 @@ Created on Tue Nov  7 11:45:24 2023
 simbolo_excluye = "~"  #Cuando la deuda se reparte entre todos, menos los que le siguen al "~"
 simboolo_nuevo = '*' #Cuado esta este simbolo y un nombre a su derecha, significa un nuevo integrante en el departamento
 
-fecha = [2023, 1, 25]
-
+import matplotlib.pyplot as plt
 
 lista=[]
 
@@ -39,7 +38,7 @@ for i in range(len(lista)):
 
 #print(deuda)
 
-#def calculo_deuda(fecha):   #Que recibe como argumento fecha
+
 
 fechas_str = []
 for dias in lista2[1:]:
@@ -47,40 +46,23 @@ for dias in lista2[1:]:
 fechas_int = [[int(numero) for numero in sublist] for sublist in fechas_str]
 
 
-    
-    
-u=0
-for fechas in fechas_int:
-    if fecha[0]==fechas[0]: #Chequea años
-        if fecha[1]>=fechas[1]: #Chequea meses
-            if fecha[2]>=fechas[2]: #Chequea dias
-                u+=1
-    elif fecha[0]>fechas[0]: #cambiar esto!!
-        u=+1
+def calculo_deuda(year, month, day):   #Que recibe como argumento fecha    
+    u=1
+    for fechas in fechas_int:
+        if year == fechas[0]: #Chequea años
+            if month >= fechas[1]: #Chequea meses
+                if day >= fechas[2]: #Chequea dias
+                    u+=1
+        elif year > fechas[0]:
+            u += 1
+    return u
         
-print(u)
-    
-#print(fecha)
-    #fecha = int(fecha)
-    
-    #years.append(int(fechas[0]))
-    #months.append(int(fechas[1]))
-    #day.append(int(fechas[2]))
-    
-#print(fechas)   
- 
+prueba = calculo_deuda(2023, 9, 13)
+print(prueba)
 
-"""
-for anos in years:
-    if fecha[0]>=anos:
-        for meses in months:
-            if fecha[1]>=meses:
-                for dias in day:
-                    if fecha[2]>=dias:
-                        print('god')
- """       
+k=0
 
-for lineas in lista2[1:]:
+for lineas in lista2[1:prueba]: #calcula la deuda hasta el valor de u (cantidad de lineas hasta la fecha)
     
     if simbolo_excluye in lineas:
         deuda[lineas[1]] = round (deuda[lineas[1]]-int(lineas[2]),2) #Se le resta al que pago en el diccionario
@@ -100,9 +82,21 @@ for lineas in lista2[1:]:
         pagan=int(lineas[2])/int(len(lineas[3:]))
         for nombres in lineas[3:]:
             deuda[nombres]+=round (pagan,2)
-#print(deuda)
     
 
+    
+#print(deuda)
+
+'''
+plt.figure()
+    #plt.plot (fechas_int[k][0], deuda['Jennifer'], label = 'Azul')
+
+    #plt.plot(fechas_int[k][0], deuda['Jennifer'], 'bo', label='Azul')  # 'bo' means blue color and circle marker
+    k+= 1
+plt.xlim([2022,1,1],[2022,3,1])
+plt.ylim([-300000,200000])
+plt.show()
+'''
 
 
 
