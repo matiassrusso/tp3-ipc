@@ -10,12 +10,12 @@ Created on Tue Nov  7 11:45:24 2023
 simbolo_excluye = "~"  #Cuando la deuda se reparte entre todos, menos los que le siguen al "~"
 simboolo_nuevo = '*' #Cuado esta este simbolo y un nombre a su derecha, significa un nuevo integrante en el departamento
 
-fecha = [2022, 1, 2]
+fecha = [2023, 1, 25]
 
 
 lista=[]
 
-with open("corto.txt","r") as corto:
+with open("transacciones_simple.txt","r") as corto:
     for linea in corto:
         texto=linea.strip().split(",")
         lista.extend(texto) #Lista es un array que guarda todas las lineas del texto.
@@ -41,23 +41,26 @@ for i in range(len(lista)):
 
 #def calculo_deuda(fecha):   #Que recibe como argumento fecha
 
-fechas = []
+fechas_str = []
 for dias in lista2[1:]:
-    fechas.append(dias[0].split('-'))
-i=0
-for fecha in fechas:
-    print(fecha)
-    i=0
-    for index in fecha:
-        print(i)
-        x=fecha.pop(i)
-        y=int(x)
-        fecha.append(y)
-        i+=1
+    fechas_str.append(dias[0].split('-'))
+fechas_int = [[int(numero) for numero in sublist] for sublist in fechas_str]
+
+
     
     
+u=0
+for fechas in fechas_int:
+    if fecha[0]==fechas[0]: #Chequea años
+        if fecha[1]>=fechas[1]: #Chequea meses
+            if fecha[2]>=fechas[2]: #Chequea dias
+                u+=1
+    elif fecha[0]>fechas[0]: #cambiar esto!!
+        u=+1
+        
+print(u)
     
-print(fecha)
+#print(fecha)
     #fecha = int(fecha)
     
     #years.append(int(fechas[0]))
