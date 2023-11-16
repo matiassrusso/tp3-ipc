@@ -38,9 +38,6 @@ for i in range(len(lista)):
 
 #print(deuda)
 
-for key in deuda:
-    locals()[key] = [[], []]
-
 
 
 fechas_str = []
@@ -61,8 +58,7 @@ def calculo_deuda(year, month, day):   #Que recibe como argumento fecha
     return u
         
 prueba = calculo_deuda(2023, 9, 13)
-print(prueba)
-
+registro = {}
 k=0
 
 for lineas in lista2[1:prueba]: #calcula la deuda hasta el valor de u (cantidad de lineas hasta la fecha)
@@ -71,8 +67,7 @@ for lineas in lista2[1:prueba]: #calcula la deuda hasta el valor de u (cantidad 
         deuda[lineas[1]] = round (deuda[lineas[1]]-int(lineas[2]),2) #Se le resta al que pago en el diccionario
         pagan=int(lineas[2])/(len(deuda)-len(lineas[4:])) #Se calcula en cada linea cuanto se debe pagar por persona
         deudores = []
-        for nombres in inquilinos:
-            print(inquilinos)
+        for nombres in inquilinos:  
             if nombres not in lineas[4:]:
                 deudores.append(nombres)
         for nombre in deudores:
@@ -87,9 +82,38 @@ for lineas in lista2[1:prueba]: #calcula la deuda hasta el valor de u (cantidad 
         for nombres in lineas[3:]:
             deuda[nombres]+=round (pagan,2)
     
+    for key in deuda:
+        
+       registro[key][0].append(fecha)
+       registro[key][1].append(deuda[key])
+
+    
 
     
 #print(deuda)
+
+
+import pandas as pd
+
+# Crear un DataFrame con los datos
+datos = pd.DataFrame({
+    'Fecha': pd.to_datetime(['-'.join(fecha) for fecha in fechas_str]),
+    'Nombre': inquilinos
+})
+
+# Graficar
+plt.figure(figsize=(10, 6))
+for nombre in inquilinos:
+    subset = datos[datos['Nombre'] == nombre]
+    plt.plot(subset['Fecha'], label=nombre)
+
+plt.title('Gráfico de Transacciones')
+plt.xlabel('Fecha')
+plt.ylabel('Valor')
+plt.legend()
+plt.show()
+
+
 
 """
 plt.figure()
